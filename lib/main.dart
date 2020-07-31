@@ -1,3 +1,4 @@
+import 'package:fcm_teste/toaster.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -13,7 +14,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-  final navigatorKey = GlobalKey<NavigatorState>();
+  //final navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   void initState() {
@@ -56,37 +57,38 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> mostrarAlert(title, message) async {
-    final context = navigatorKey.currentState.overlay.context;
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(title),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text(message)
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text('ok'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
+    //final context = navkey.currentState.overlay;
+    G2xToaster.showOnTop();return;
+    // return showDialog<void>(
+    //   context: context,
+    //   barrierDismissible: false, // user must tap button!
+    //   builder: (BuildContext context) {
+    //     return AlertDialog(
+    //       title: Text(title),
+    //       content: SingleChildScrollView(
+    //         child: ListBody(
+    //           children: <Widget>[
+    //             Text(message)
+    //           ],
+    //         ),
+    //       ),
+    //       actions: <Widget>[
+    //         FlatButton(
+    //           child: Text('ok'),
+    //           onPressed: () {
+    //             Navigator.of(context).pop();
+    //           },
+    //         ),
+    //       ],
+    //     );
+    //   },
+    // );
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: navigatorKey,
+      navigatorKey: G2xToaster.navkey,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
